@@ -1,7 +1,9 @@
 import { createStore } from "vuex";
+import useMessage from '@/hooks/useMessage.js'
 
 const API_KEY = process.env.VUE_APP_API_KEY;
 const URL = "http://api.openweathermap.org";
+const message = useMessage()
 
 export default createStore({
   state: {
@@ -51,7 +53,7 @@ export default createStore({
         .then((res) => res.json())
         .then((data) => {
           if(!data.length){
-            alert('Город не найден')
+            message('error','Город не найден')
             return;
           }
 

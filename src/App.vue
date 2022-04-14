@@ -4,6 +4,7 @@
     <Search />
     <Weather />
     <Forecast />
+    <Message />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import Weather from './components/Weather.vue'
 import Forecast from './components/Forecast.vue'
 import Search from './components/Search.vue'
 import Settings from './components/Settings.vue'
+import Message from '@/components/Message.vue'
 
 export default {
   name: 'App',
@@ -19,9 +21,12 @@ export default {
     Weather,
     Forecast,
     Search,
-    Settings
-  }
+    Settings,
+    Message
+  },
+  
 }
+
 </script>
 
 <style lang="scss">
