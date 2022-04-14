@@ -1,7 +1,16 @@
 <template>
   <div class="search">
-    <input class="search__input" type="text" placeholder="Укажите город" />
-    <button class="search__button">
+    <input 
+      v-model="search" 
+      class="search__input" 
+      type="text" 
+      placeholder="Укажите город" 
+      @keydown.enter="fetchGeoCode" 
+    >
+    <button
+      class="search__button"
+      @click="fetchGeoCode"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -17,7 +26,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      search: 'moscow'
+    }
+  },
+  methods: {
+    fetchGeoCode(){
+      this.$store.dispatch('fetchGeoCode', this.search)
+    }
+  }
+};
 </script>
 
 <style lang="scss">

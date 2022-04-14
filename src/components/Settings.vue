@@ -1,8 +1,19 @@
 <template>
   <div class="settings">
-    <div class="settings__inner" ref="dropdown">
-      <button class="settings__button" @click="toggle">Settings</button>
-      <div class="settings__dropdown" :class="{ active: isOpened }">
+    <div
+      ref="dropdown"
+      class="settings__inner"
+    >
+      <button
+        class="settings__button"
+        @click="toggle"
+      >
+        Settings
+      </button>
+      <div
+        class="settings__dropdown"
+        :class="{ active: isOpened }"
+      >
         <div class="settings__item">
           <button
             class="settings__item-btn"
@@ -49,6 +60,15 @@ export default {
       temp: "°C",
     };
   },
+  mounted() {
+    const dropdown = this.$refs.dropdown;
+
+    document.body.addEventListener("click", (e) => {
+      if (!e.path.includes(dropdown)) {
+        this.isOpened = false;
+      }
+    });
+  },
   methods: {
     toggle() {
       this.isOpened = !this.isOpened;
@@ -59,15 +79,6 @@ export default {
     changeTemp(e) {
       this.temp = e.target.innerText;
     },
-  },
-  mounted() {
-    const dropdown = this.$refs.dropdown;
-
-    document.body.addEventListener("click", (e) => {
-      if (!e.path.includes(dropdown)) {
-        this.isOpened = false;
-      }
-    });
   },
 };
 </script>

@@ -1,0 +1,82 @@
+{
+  "months": [
+    {
+      "ru": "января",
+      "en": "january"
+    },
+    {
+      "ru": "февраля",
+      "en": "february"
+    },
+    {
+      "ru": "марта",
+      "en": "march"
+    },
+    {
+      "ru": "апреля",
+      "en": "april"
+    },
+    {
+      "ru": "мая",
+      "en": "may"
+    },
+    {
+      "ru": "июня",
+      "en": "june"
+    },
+    {
+      "ru": "июля",
+      "en": "july"
+    },
+    {
+      "ru": "августа",
+      "en": "august"
+    },
+    {
+      "ru": "сентября",
+      "en": "september"
+    },
+    {
+      "ru": "октября",
+      "en": "october"
+    },
+    {
+      "ru": "ноября",
+      "en": "nvember"
+    },
+    {
+      "ru": "декабря",
+      "en": "december"
+    }
+  ],
+  "daysOfWeek": [
+    {
+      "ru": "Воскресенье",
+      "en": "Sunday"
+    },
+    {
+      "ru": "Понедельник",
+      "en": "Monday"
+    },
+    {
+      "ru": "Вторник",
+      "en": "Tuesday"
+    },
+    {
+      "ru": "Среда",
+      "en": "Wednesday"
+    },
+    {
+      "ru": "Четверг",
+      "en": "Thursday"
+    },
+    {
+      "ru": "Пятница",
+      "en": "Friday"
+    },
+    {
+      "ru": "Суббота",
+      "en": "Saturday"
+    }
+  ]
+}

@@ -1,18 +1,40 @@
 <template>
-  <div class="forecast">
-    <div class="forecast__title">Прогноз на неделю</div>
-    <Splide class="forecast__list" :options="options">
-      <SplideSlide class="forecast__item" v-for="item in 7" :key="item">
-        <div class="forecast__day-week">Понедельник</div>
-        <div class="forecast__day-num">11 апреля</div>
+  <div
+    v-if="city"
+    class="forecast"
+  >
+    <div class="forecast__title">
+      Прогноз на неделю
+    </div>
+    <Splide
+      class="forecast__list"
+      :options="options"
+    >
+      <SplideSlide
+        v-for="item in list"
+        :key="item"
+        class="forecast__item"
+      >
+        <div class="forecast__day-week">
+          {{ getDayName(item.dt) }}
+        </div>
+        <div class="forecast__day-num">
+          {{ getMonth(item.dt) }}
+        </div>
         <img
-        class="forecast__icon"
-          src="https://openweathermap.org/img/wn/02d@2x.png"
+          class="forecast__icon"
+          :src="`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`"
           alt="Clouds"
-        />
-        <div class="forecast__temp-day">Днём +6°</div>
-        <div class="forecast__temp-night">Ночью -1°</div>
-        <div class="forecast__desc">Пасмурно</div>
+        >
+        <div class="forecast__temp-day">
+          Днём {{ getTemp(item.temp.day) }}
+        </div>
+        <div class="forecast__temp-night">
+          Ночью {{ getTemp(item.temp.night) }}
+        </div>
+        <div class="forecast__desc">
+          {{ capitalizeFirstChar(item.weather[0].description) }}
+        </div>
       </SplideSlide>
     </Splide>
   </div>
@@ -21,11 +43,20 @@
 <script>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/vue-splide/css";
+import useTemp from '@/hooks/useTemp.js'
+import useCapitalizeFirstChar from '@/hooks/useCapitalizeFirstChar.js'
+import dictionary from '@/dictionary.json'
 
 export default {
   components: {
     Splide,
     SplideSlide,
+  },
+  setup(){
+    const getTemp = useTemp()
+    const capitalizeFirstChar = useCapitalizeFirstChar()
+
+    return { getTemp, capitalizeFirstChar }
   },
   data() {
     return {
@@ -51,6 +82,32 @@ export default {
       },
     };
   },
+  computed: {
+    city(){
+      return this.$store.state.city
+    },
+    list(){
+      return this.$store.state.dailyWeather
+    }
+  },
+  methods:{
+    getDayName(timestamp){
+      const dayNum = new Date(timestamp * 1000).getDay()
+      const lang = this.$store.state.lang.toLowerCase()
+      const days = dictionary.daysOfWeek
+
+      return days[dayNum][lang]
+    },
+    getMonth(timestamp){
+      const date = new Date(timestamp * 1000)
+      const monthNum = date.getMonth()
+      const dayNum = date.getDate()
+      const lang = this.$store.state.lang.toLowerCase()
+      const months = dictionary.months
+
+      return `${dayNum} ${months[monthNum][lang]}`
+    }
+  }
 };
 </script>
 
@@ -78,6 +135,7 @@ export default {
   }
   &__desc {
     margin-top: 5px;
+    text-align: center;
   }
   &__day-num,
   &__temp-night,
