@@ -1,6 +1,9 @@
 <template>
+  <div class="weather__loading" v-if="isLoading">
+    <Spinner />
+  </div>
   <div
-    v-if="city"
+    v-else-if="city"
     :class="`weather weather__${weather.main}`"
   >
     <div class="weather__inner">
@@ -40,10 +43,12 @@
 import WeatherSlider from "@/components/WeatherSlider.vue";
 import useTemp from '@/hooks/useTemp.js'
 import useCapitalizeFirstChar from '@/hooks/useCapitalizeFirstChar.js'
+import Spinner from "./Spinner.vue";
 
 export default {
   components: {
     WeatherSlider,
+    Spinner
   },
   setup(){
     const getTemp = useTemp()
@@ -58,6 +63,9 @@ export default {
     city() {
       return this.$store.state.city;
     },
+    isLoading(){
+      return this.$store.state.isLoading
+    }
   }
 };
 </script>
@@ -93,6 +101,7 @@ $weatherStyles: "thundershtorm", "drizzle", "rain", "snow", "smoke", "clouds",
   border-radius: 15px;
   padding: 20px;
   background-color: rgb(79, 177, 243);
+  min-height: 330px;
   &__inner {
     position: relative;
     z-index: 3;
@@ -145,6 +154,16 @@ $weatherStyles: "thundershtorm", "drizzle", "rain", "snow", "smoke", "clouds",
       top: 0;
       left: 0;
     }
+  }
+  &__loading{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 330px;
+    background-color: rgb(42, 42, 42);
+    border-radius: 15px;
+    margin: 15px 0;
   }
 }
 </style>

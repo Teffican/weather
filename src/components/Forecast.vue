@@ -1,6 +1,9 @@
 <template>
+  <div class="forecast__loading" v-if="isLoading">
+    <Spinner />
+  </div>
   <div
-    v-if="city"
+    v-else-if="city"
     class="forecast"
   >
     <div class="forecast__title">
@@ -46,11 +49,13 @@ import "@splidejs/vue-splide/css";
 import useTemp from '@/hooks/useTemp.js'
 import useCapitalizeFirstChar from '@/hooks/useCapitalizeFirstChar.js'
 import dictionary from '@/dictionary.json'
+import Spinner from "./Spinner.vue";
 
 export default {
   components: {
     Splide,
     SplideSlide,
+    Spinner
   },
   setup(){
     const getTemp = useTemp()
@@ -88,6 +93,9 @@ export default {
     },
     list(){
       return this.$store.state.dailyWeather
+    },
+    isLoading(){
+      return this.$store.state.isLoading
     }
   },
   methods:{
@@ -142,6 +150,16 @@ export default {
   &__desc {
     color: #939cb0;
     font-size: 14px;
+  }
+  &__loading{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 297px;
+    background-color: rgb(42, 42, 42);
+    border-radius: 15px;
+    margin: 15px 0;
   }
 }
 </style>

@@ -9,6 +9,7 @@
     >
     <button
       class="search__button"
+      :disabled="isLoading"
       @click="fetchGeoCode"
     >
       <svg
@@ -34,7 +35,14 @@ export default {
   },
   methods: {
     fetchGeoCode(){
-      this.$store.dispatch('fetchGeoCode', this.search)
+      if(!this.isLoading){
+        this.$store.dispatch('fetchGeoCode', this.search)
+      }
+    }
+  },
+  computed: {
+    isLoading(){
+      return this.$store.state.isLoading
     }
   }
 };
