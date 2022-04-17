@@ -1,9 +1,11 @@
 import { createStore } from "vuex";
 import useMessage from '@/hooks/useMessage.js'
+import dictionary from '@/dictionary.json'
 
 const API_KEY = process.env.VUE_APP_API_KEY;
 const URL = "http://api.openweathermap.org";
 const message = useMessage()
+const dict = dictionary
 
 export default createStore({
   state: {
@@ -44,7 +46,13 @@ export default createStore({
     },
     setDailyWeather(state, payload){
       state.dailyWeather = payload
-    }
+    },
+    setLang(state, lang){
+      state.lang = lang
+    },
+    setTemp(state, temp){
+      state.temp = temp
+    },
   },
   actions: {
     fetchGeoCode(context, search) {
@@ -53,7 +61,8 @@ export default createStore({
         .then((res) => res.json())
         .then((data) => {
           if(!data.length){
-            message('error','Город не найден')
+            const lang = context.state.lang.toLocaleLowerCase()
+            message('error', dict.message.cityError[lang])
             return;
           }
 
@@ -73,7 +82,7 @@ export default createStore({
 
       const lat = context.state.coordinates.lat;
       const lon = context.state.coordinates.lon;
-      const units = context.state.temp === "°C" ? "metric" : "impreial";
+      const units = context.state.temp === "°C" ? "metric" : "imperial";
 
       fetch(
         `${URL}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=${units}&lang=${context.state.lang}&appid=${API_KEY}`

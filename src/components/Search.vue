@@ -4,7 +4,7 @@
       v-model="search" 
       class="search__input" 
       type="text" 
-      placeholder="Укажите город" 
+      :placeholder="dict.search.placeholder[lang]" 
       @keydown.enter="fetchGeoCode" 
     >
     <button
@@ -27,10 +27,13 @@
 </template>
 
 <script>
+import dictionary from '@/dictionary.json'
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
-      search: 'moscow'
+      search: ''
     }
   },
   methods: {
@@ -40,10 +43,14 @@ export default {
       }
     }
   },
-  computed: {
-    isLoading(){
-      return this.$store.state.isLoading
-    }
+  computed: mapState({
+    isLoading: state => state.isLoading,
+    lang: state => state.lang.toLowerCase(),
+  }),
+  setup(){
+    const dict = dictionary
+
+    return {dict}
   }
 };
 </script>

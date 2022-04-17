@@ -25,13 +25,18 @@
             {{ capitalizeFirstChar(weather.description) }}
           </div>
           <div class="weather__desc-feels">
-            Ощущается как <span>{{ getTemp(weather.tempFeels) }}</span>
+            {{dict.weather.feelsLike[lang]}} 
+            <span>{{ getTemp(weather.tempFeels) }}</span>
           </div>
         </div>
       </div>
 
       <div class="weather__wind">
-        {{ weather.wind }} м/с
+        {{ weather.wind }}
+        {{temp === '°C' 
+          ? dict.weather.windUnits.metric[lang]
+          : dict.weather.windUnits.imperial[lang]
+          }}
       </div>
 
       <WeatherSlider />
@@ -44,6 +49,8 @@ import WeatherSlider from "@/components/WeatherSlider.vue";
 import useTemp from '@/hooks/useTemp.js'
 import useCapitalizeFirstChar from '@/hooks/useCapitalizeFirstChar.js'
 import Spinner from "./Spinner.vue";
+import { mapState } from 'vuex';
+import dictionary from '@/dictionary.json'
 
 export default {
   components: {
@@ -53,20 +60,17 @@ export default {
   setup(){
     const getTemp = useTemp()
     const capitalizeFirstChar = useCapitalizeFirstChar()
+    const dict = dictionary
 
-    return {getTemp, capitalizeFirstChar}
+    return {getTemp, capitalizeFirstChar, dict}
   },
-  computed: {
-    weather() {
-      return this.$store.state.currentWeather;
-    },
-    city() {
-      return this.$store.state.city;
-    },
-    isLoading(){
-      return this.$store.state.isLoading
-    }
-  }
+  computed: mapState({
+    weather: state => state.currentWeather,
+    city: state => state.city,
+    isLoading: state => state.isLoading,
+    lang: state => state.lang.toLowerCase(),
+    temp: state => state.temp
+  })
 };
 </script>
 

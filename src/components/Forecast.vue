@@ -7,7 +7,7 @@
     class="forecast"
   >
     <div class="forecast__title">
-      Прогноз на неделю
+      {{dict.forecast.title[lang]}}
     </div>
     <Splide
       class="forecast__list"
@@ -30,10 +30,10 @@
           alt="Clouds"
         >
         <div class="forecast__temp-day">
-          Днём {{ getTemp(item.temp.day) }}
+          {{dict.forecast.day[lang]}} {{ getTemp(item.temp.day) }}
         </div>
         <div class="forecast__temp-night">
-          Ночью {{ getTemp(item.temp.night) }}
+          {{dict.forecast.night[lang]}} {{ getTemp(item.temp.night) }}
         </div>
         <div class="forecast__desc">
           {{ capitalizeFirstChar(item.weather[0].description) }}
@@ -50,6 +50,7 @@ import useTemp from '@/hooks/useTemp.js'
 import useCapitalizeFirstChar from '@/hooks/useCapitalizeFirstChar.js'
 import dictionary from '@/dictionary.json'
 import Spinner from "./Spinner.vue";
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -60,8 +61,9 @@ export default {
   setup(){
     const getTemp = useTemp()
     const capitalizeFirstChar = useCapitalizeFirstChar()
+    const dict = dictionary
 
-    return { getTemp, capitalizeFirstChar }
+    return { getTemp, capitalizeFirstChar, dict }
   },
   data() {
     return {
@@ -87,17 +89,12 @@ export default {
       },
     };
   },
-  computed: {
-    city(){
-      return this.$store.state.city
-    },
-    list(){
-      return this.$store.state.dailyWeather
-    },
-    isLoading(){
-      return this.$store.state.isLoading
-    }
-  },
+  computed: mapState({
+    city: state => state.city,
+    list: state => state.dailyWeather,
+    isLoading: state => state.isLoading,
+    lang: state => state.lang.toLowerCase(),
+  }),
   methods:{
     getDayName(timestamp){
       const dayNum = new Date(timestamp * 1000).getDay()

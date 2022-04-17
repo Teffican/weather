@@ -52,12 +52,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       isOpened: false,
-      lang: "RU",
-      temp: "°C",
     };
   },
   mounted() {
@@ -74,12 +73,23 @@ export default {
       this.isOpened = !this.isOpened;
     },
     changeLang(e) {
-      this.lang = e.target.innerText;
+      this.$store.commit('setLang', e.target.innerText)
+      if(this.city){
+        this.$store.dispatch('fetchGeoCode', this.city)
+      }
     },
     changeTemp(e) {
-      this.temp = e.target.innerText;
+      this.$store.commit('setTemp', e.target.innerText)
+      if(this.city){
+        this.$store.dispatch('fetchGeoCode', this.city)
+      }
     },
   },
+  computed: mapState({
+    lang: state => state.lang,
+    temp: state => state.temp,
+    city: state => state.city,
+  })
 };
 </script>
 

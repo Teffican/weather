@@ -78,5 +78,47 @@
       "ru": "Суббота",
       "en": "Saturday"
     }
-  ]
+  ],
+  "weather": {
+    "feelsLike": {
+      "ru": "Ощущается как",
+      "en": "Feels like"
+    },
+    "windUnits": {
+      "metric": {
+        "ru": "м/с",
+        "en": "m/s"
+      },
+      "imperial": {
+        "ru": "ми/ч",
+        "en": "mi/h"
+      }
+    }
+  },
+  "forecast": {
+    "title": {
+      "ru": "Прогноз на неделю",
+      "en": "Weekly forecast"
+    },
+    "day": {
+      "ru": "Днём",
+      "en": "Day"
+    },
+    "night": {
+      "ru": "Ночью",
+      "en": "Night"
+    }
+  },
+  "search": {
+    "placeholder": {
+      "ru": "Укажите город",
+      "en": "Enter the city"
+    }
+  },
+  "message": {
+    "cityError": {
+      "ru": "Город не найден",
+      "en": "City not found"
+    }
+  }
 }
