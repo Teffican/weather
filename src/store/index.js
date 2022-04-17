@@ -3,7 +3,7 @@ import useMessage from '@/hooks/useMessage.js'
 import dictionary from '@/dictionary.json'
 
 const API_KEY = process.env.VUE_APP_API_KEY;
-const URL = "http://api.openweathermap.org";
+const URL = "https://api.openweathermap.org";
 const message = useMessage()
 const dict = dictionary
 
