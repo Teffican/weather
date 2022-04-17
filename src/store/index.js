@@ -33,7 +33,7 @@ export default createStore({
       state.isLoading = payload;
     },
     setCity(state, cityNames) {
-      state.city = state.lang === "RU" ? cityNames.ru : cityNames.en;
+      state.city = cityNames[state.lang.toLowerCase()] ?? cityNames
     },
     setCoordinates(state, coordinates) {
       state.coordinates = coordinates;
@@ -66,7 +66,7 @@ export default createStore({
             return;
           }
 
-          context.commit("setCity", data[0].local_names);
+          context.commit("setCity", data[0].local_names ?? data[0].name);
 
           context.commit("setCoordinates", {
             lat: data[0].lat,
