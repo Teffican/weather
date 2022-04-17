@@ -70,7 +70,11 @@ export default {
     isLoading: state => state.isLoading,
     lang: state => state.lang.toLowerCase(),
     temp: state => state.temp
-  })
+  }),
+  mounted(){
+    const lastCity = localStorage.getItem('city')
+    lastCity && this.$store.dispatch('fetchGeoCode', lastCity)
+  }
 };
 </script>
 

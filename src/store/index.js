@@ -9,8 +9,8 @@ const dict = dictionary
 
 export default createStore({
   state: {
-    lang: "RU",
-    temp: "°C",
+    lang: localStorage.getItem('lang') ?? 'RU',
+    temp: localStorage.getItem('temp') ?? '°C',
     city: "",
     isLoading: false,
     coordinates: {
@@ -33,7 +33,9 @@ export default createStore({
       state.isLoading = payload;
     },
     setCity(state, cityNames) {
-      state.city = cityNames[state.lang.toLowerCase()] ?? cityNames
+      const city = cityNames[state.lang.toLowerCase()] ?? cityNames
+      state.city = city
+      localStorage.setItem('city', city)
     },
     setCoordinates(state, coordinates) {
       state.coordinates = coordinates;
@@ -49,9 +51,11 @@ export default createStore({
     },
     setLang(state, lang){
       state.lang = lang
+      localStorage.setItem('lang', lang)
     },
     setTemp(state, temp){
       state.temp = temp
+      localStorage.setItem('temp', temp)
     },
   },
   actions: {
