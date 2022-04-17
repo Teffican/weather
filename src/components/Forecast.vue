@@ -1,5 +1,8 @@
 <template>
-  <div class="forecast__loading" v-if="isLoading">
+  <div
+    v-if="isLoading"
+    class="forecast__loading"
+  >
     <Spinner />
   </div>
   <div
@@ -7,7 +10,7 @@
     class="forecast"
   >
     <div class="forecast__title">
-      {{dict.forecast.title[lang]}}
+      {{ dict.forecast.title[lang] }}
     </div>
     <Splide
       class="forecast__list"
@@ -30,10 +33,10 @@
           alt="Clouds"
         >
         <div class="forecast__temp-day">
-          {{dict.forecast.day[lang]}} {{ getTemp(item.temp.day) }}
+          {{ dict.forecast.day[lang] }} {{ getTemp(item.temp.day) }}
         </div>
         <div class="forecast__temp-night">
-          {{dict.forecast.night[lang]}} {{ getTemp(item.temp.night) }}
+          {{ dict.forecast.night[lang] }} {{ getTemp(item.temp.night) }}
         </div>
         <div class="forecast__desc">
           {{ capitalizeFirstChar(item.weather[0].description) }}

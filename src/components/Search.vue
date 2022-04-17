@@ -31,11 +31,20 @@ import dictionary from '@/dictionary.json'
 import { mapState } from 'vuex';
 
 export default {
+  setup(){
+    const dict = dictionary
+
+    return {dict}
+  },
   data() {
     return {
       search: ''
     }
   },
+  computed: mapState({
+    isLoading: state => state.isLoading,
+    lang: state => state.lang.toLowerCase(),
+  }),
   methods: {
     fetchGeoCode(){
       if(!this.isLoading){
@@ -43,15 +52,6 @@ export default {
       }
     }
   },
-  computed: mapState({
-    isLoading: state => state.isLoading,
-    lang: state => state.lang.toLowerCase(),
-  }),
-  setup(){
-    const dict = dictionary
-
-    return {dict}
-  }
 };
 </script>
 

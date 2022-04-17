@@ -1,5 +1,8 @@
 <template>
-  <div class="weather__loading" v-if="isLoading">
+  <div
+    v-if="isLoading"
+    class="weather__loading"
+  >
     <Spinner />
   </div>
   <div
@@ -25,7 +28,7 @@
             {{ capitalizeFirstChar(weather.description) }}
           </div>
           <div class="weather__desc-feels">
-            {{dict.weather.feelsLike[lang]}} 
+            {{ dict.weather.feelsLike[lang] }} 
             <span>{{ getTemp(weather.tempFeels) }}</span>
           </div>
         </div>
@@ -33,10 +36,10 @@
 
       <div class="weather__wind">
         {{ weather.wind }}
-        {{temp === '°C' 
+        {{ temp === '°C' 
           ? dict.weather.windUnits.metric[lang]
           : dict.weather.windUnits.imperial[lang]
-          }}
+        }}
       </div>
 
       <WeatherSlider />

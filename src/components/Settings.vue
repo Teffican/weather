@@ -8,7 +8,7 @@
         class="settings__button"
         @click="toggle"
       >
-        {{dict.settings.title[lang.toLowerCase()]}}
+        {{ dict.settings.title[lang.toLowerCase()] }}
       </button>
       <div
         class="settings__dropdown"
@@ -56,11 +56,21 @@ import { mapState } from 'vuex';
 import dictionary from '@/dictionary.json'
 
 export default {
+  setup(){
+    const dict = dictionary
+
+    return {dict}
+  },
   data() {
     return {
       isOpened: false,
     };
   },
+  computed: mapState({
+    lang: state => state.lang,
+    temp: state => state.temp,
+    city: state => state.city,
+  }),
   mounted() {
     const dropdown = this.$refs.dropdown;
 
@@ -87,16 +97,6 @@ export default {
       }
     },
   },
-  computed: mapState({
-    lang: state => state.lang,
-    temp: state => state.temp,
-    city: state => state.city,
-  }),
-  setup(){
-    const dict = dictionary
-
-    return {dict}
-  }
 };
 </script>
 
