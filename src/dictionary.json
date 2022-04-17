@@ -120,5 +120,11 @@
       "ru": "Город не найден",
       "en": "City not found"
     }
+  },
+  "settings": {
+    "title": {
+      "ru": "Настройки",
+      "en": "Settings"
+    }
   }
 }

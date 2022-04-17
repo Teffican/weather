@@ -8,7 +8,7 @@
         class="settings__button"
         @click="toggle"
       >
-        Settings
+        {{dict.settings.title[lang.toLowerCase()]}}
       </button>
       <div
         class="settings__dropdown"
@@ -53,6 +53,8 @@
 
 <script>
 import { mapState } from 'vuex';
+import dictionary from '@/dictionary.json'
+
 export default {
   data() {
     return {
@@ -89,7 +91,12 @@ export default {
     lang: state => state.lang,
     temp: state => state.temp,
     city: state => state.city,
-  })
+  }),
+  setup(){
+    const dict = dictionary
+
+    return {dict}
+  }
 };
 </script>
 
