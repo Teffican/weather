@@ -7,12 +7,14 @@
       <button
         class="settings__button"
         @click="toggle"
+        ref="settingsBtn"
       >
         {{ dict.settings.title[lang.toLowerCase()] }}
       </button>
       <div
         class="settings__dropdown"
         :class="{ active: isOpened }"
+        :style="{width: $refs.settingsBtn?.clientWidth + 'px'}"
       >
         <div class="settings__item">
           <button
@@ -112,6 +114,7 @@ export default {
     background-color: rgb(42, 42, 42);
     font-size: 16px;
     min-height: 40px;
+    min-width: 135px;
     color: #fff;
     outline: none;
     border: none;
@@ -139,7 +142,7 @@ export default {
     top: 0;
     right: 0;
     opacity: 0;
-    width: 112px;
+    min-width: 135px;
     padding: 10px;
     transition: all 0.3s;
     &.active {
