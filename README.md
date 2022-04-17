@@ -1,24 +1,7 @@
-# weather
+# Demo
 
-## Project setup
-```
-npm install
-```
+https://teffican.github.io/weather/
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Stack
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+JavaScript, VueJs 3, Vuex, SCSS
