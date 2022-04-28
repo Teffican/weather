@@ -68,6 +68,8 @@ export default {
     height: 48px;
     bottom: 0;
     right: 0;
+    border: none;
+    border-radius: 5px;
   }
   &__input {
     border-radius: 5px;
