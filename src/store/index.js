@@ -32,8 +32,7 @@ export default createStore({
     setIsLoading(state, payload) {
       state.isLoading = payload;
     },
-    setCity(state, cityNames) {
-      const city = cityNames[state.lang.toLowerCase()] ?? cityNames
+    setCity(state, city) {
       state.city = city
       localStorage.setItem('city', city)
     },
@@ -64,13 +63,14 @@ export default createStore({
       fetch(`${URL}/geo/1.0/direct?q=${search}&appid=${API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
+          const lang = context.state.lang.toLocaleLowerCase()
+
           if(!data.length){
-            const lang = context.state.lang.toLocaleLowerCase()
             message('error', dict.message.cityError[lang])
             return;
           }
 
-          context.commit("setCity", data[0].local_names ?? data[0].name);
+          context.commit("setCity", data[0].local_names[lang] ?? data[0].name);
 
           context.commit("setCoordinates", {
             lat: data[0].lat,
