@@ -5,9 +5,9 @@
       class="settings__inner"
     >
       <button
+        ref="settingsBtn"
         class="settings__button"
         @click="toggle"
-        ref="settingsBtn"
       >
         {{ dict.settings.title[lang.toLowerCase()] }}
       </button>
