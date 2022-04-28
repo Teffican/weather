@@ -47,7 +47,7 @@ export default {
   }),
   methods: {
     fetchGeoCode(){
-      if(!this.isLoading){
+      if(!this.isLoading && this.search.length){
         this.$store.dispatch('fetchGeoCode', this.search)
       }
     }
