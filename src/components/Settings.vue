@@ -77,7 +77,9 @@ export default {
     const dropdown = this.$refs.dropdown;
 
     document.body.addEventListener("click", (e) => {
-      if (!e.path.includes(dropdown)) {
+      const path = e.path || (e.composedPath && e.composedPath());
+      
+      if (!path.includes(dropdown)) {
         this.isOpened = false;
       }
     });

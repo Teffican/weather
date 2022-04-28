@@ -42,6 +42,7 @@ export default {
     background-color: rgb(20, 20, 20);
     color: #fff;
     padding-top: 100px;
+    height: 100vh;
   }
   
   .container{
