@@ -65,7 +65,7 @@ export default {
     transition: all 0.3s;
     max-width: 100px;
     width: 100%;
-    height: 48px;
+    height: 100%;
     bottom: 0;
     right: 0;
     border: none;
